@@ -1,15 +1,26 @@
-% Зачем: Выбор внутренней TeX кодировки.
-\usepackage{courier}
+% Зачем: Предоставляет проприетарный Times New Roman.
+% ОБНОВЛЕНИЕ: лучше использовать scalable-cyrfonts-tex: меньше проблем с установкой
+% Из руководства к PSCyr: "Во избежание проблем пакет PSCyr должен загружаться перед пакета-ми inputenc и babel".
+% Примечание: Требует шаманства при установке, инструкция http://plumbum-blog.blogspot.com/2010/06/miktex-28-pscyr-04d.html
+% http://blog.harrix.org/?p=444
+% \usepackage{pscyr}
 
-\usepackage[T2A, T1]{fontenc}
+% % Зачем: Выбор внутренней TeX кодировки.
+% \usepackage[T2A]{fontenc}
 
-% Зачем: Предоставляет свободный Times New Roman.
-% Шрифт идёт вместе с пакетом scalable-cyrfonts-tex в Ubuntu/Debian
+\usepackage{fontspec}
+\usepackage{xunicode}
+\usepackage{xltxtra}
 
-% пакет scalable-cyrfonts-tex может конфликтовать с texlive-fonts-extra в Ubuntu
-% решение: Для себя я решил эту проблему так: пересобрал пакет scalable-cyrfonts-tex, изменив его имя. Решение топорное, но работает. Желающие могут скачать мой пакет здесь:
-% https://yadi.sk/d/GW2PhDgEcJH7m
-% Установка:
-% dpkg -i scalable-cyrfonts-tex-shurph_4.16_all.deb
 
-\usefont{T2A}{ftm}{m}{sl}
+\usepackage{polyglossia}                        % Поддержка многоязычности (fontspec подгружается автоматически)
+    \setmainlanguage[babelshorthands=true]{russian} % Язык по-умолчанию русский с поддержкой приятных команд пакета babel
+    \setotherlanguage{english}                      % Дополнительный язык = английский (в американской вариации по-умолчанию)
+    \setmonofont{Courier New} % моноширинный шрифт
+    \newfontfamily\cyrillicfonttt{Courier New}[Script = Cyrillic] % моноширинный шрифт для кириллицы
+    \defaultfontfeatures{Ligatures=TeX} % стандартные лигатуры TeX, замены нескольких дефисов на тире и т. п. Настройки моноширинного шрифта должны идти до этой строки, чтобы при врезках кода программ в коде не применялись лигатуры и замены дефисов
+    \setmainfont{Arial} % Основной шрифт
+    \newfontfamily\cyrillicfont{Times New Roman}[Script = Cyrillic] % Основной шрифт для кириллицы
+    \setsansfont{Times New Roman} % Шрифт без засечек
+    \newfontfamily\cyrillicfontsf{Arial}[Script = Cyrillic] % Шрифт без засечек для кириллицы
+    % \usepackage{unicode-math} %\setmathfont
